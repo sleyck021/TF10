@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default {
 
-    name: 'hubspot-create',
+    name: 'hubspot-company-create',
     description: 'Create Company in Hubspot',
     arguments: {
 
@@ -15,6 +15,20 @@ export default {
             return;
         }
 
-        /** TF 09 */
+        const url = `https://api.hubapi.com/crm/v3/objects/companies`;
+
+        const response = await axios.post(url, {
+            properties: {
+                name: `Empresa Teste ${Date.now()}`,
+                address: 'Rua das Flores, 123',
+                city: 'Sao Paulo'
+            }
+        }, {
+            headers: {
+                Authorization: `Bearer ${hubspotToken}`
+            }
+        });
+
+        console.log(response.data);
     }
 }
